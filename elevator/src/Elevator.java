@@ -3,11 +3,10 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Elevator implements Runnable {
+public class Elevator {
     private final int id;
     private AtomicInteger currentFloor;
     private ElevatorState state;
-    private volatile boolean isRunning = true;
 
     private final TreeSet<Integer> upRequests;
     private final TreeSet<Integer> downRequests;
@@ -42,13 +41,24 @@ public class Elevator implements Runnable {
     }
 
     public void move() {
-        state.move(this);
+        // Continue moving until all pending requests have been handled
+        while (!upRequests.isEmpty() || !downRequests.isEmpty()) {
+            state.move(this);
+            try {
+                Thread.sleep(1000); // simulate travel time
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
     }
 
     // --- Request Handling ---
     public synchronized void addRequest(Request request) {
         System.out.println("Elevator " + id + " processing: " + request);
         state.addRequest(this, request);
+        // after queuing request, immediately handle movement synchronously
+        move();
     }
 
     // --- Getters and Setters ---
@@ -63,21 +73,7 @@ public class Elevator implements Runnable {
     public Direction getDirection() { return state.getDirection(); }
     public TreeSet<Integer> getUpRequests() { return upRequests; }
     public TreeSet<Integer> getDownRequests() { return downRequests; }
-    public boolean isRunning() { return isRunning; }
-    public void stopElevator() { this.isRunning = false; }
 
-    @Override
-    public void run() {
-        while (isRunning) {
-            move();
-            try {
-                Thread.sleep(1000); // Simulate movement time
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                isRunning = false;
-            }
-        }
-    }
 
     public String getState() {
         if (state instanceof IdleState) return "IDLE";
