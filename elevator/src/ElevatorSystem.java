@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class ElevatorSystem {
@@ -9,15 +11,18 @@ private static ElevatorSystem instance;
 
     private final Map<Integer, Elevator> elevators;
     private final ElevatorSelectionStrategy selectionStrategy;
+    private final ExecutorService executorService;
 
     private ElevatorSystem(int numElevators) {
         this.selectionStrategy = new NearestElevatorStrategy();
+        this.executorService = Executors.newFixedThreadPool(numElevators);
 
         List<Elevator> elevatorList = new ArrayList<>();
+        ElevatorDisplay elevatorDisplay = new ElevatorDisplay(); // Create the observer
 
         for (int i = 1; i <= numElevators; i++) {
             Elevator elevator = new Elevator(i);
-            elevator.addObserver(new ElevatorDisplay(elevator)); // Attach a display for this elevator
+            elevator.addObserver(elevatorDisplay); // Attach the observer
             elevatorList.add(elevator);
         }
 
@@ -31,6 +36,11 @@ private static ElevatorSystem instance;
         return instance;
     }
 
+    public void start() {
+        for (Elevator elevator : elevators.values()) {
+            executorService.submit(elevator);
+        }
+    }
 
     // --- Facade Methods ---
 
@@ -62,5 +72,11 @@ private static ElevatorSystem instance;
         }
     }
 
-    public void shutdown() { }
+    public void shutdown() {
+        System.out.println("Shutting down elevator system...");
+        for (Elevator elevator : elevators.values()) {
+            elevator.stopElevator();
+        }
+        executorService.shutdown();
+    }
 }
