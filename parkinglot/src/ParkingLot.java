@@ -22,17 +22,15 @@ public class ParkingLot {
 
     public Ticket park(Vehicle vehicle, int floorId) {
         ParkingFloor parkingFloor = floors.get(floorId);
-        List<ParkingSpot> availableSpots = parkingFloor.getAvailableParkingSpots();
-        for(ParkingSpot parkingSpot : availableSpots) {
-            if(parkingSpot.getsize() == vehicle.getSize()) {
-                parkingSpot.park(vehicle);
-                Ticket ticket = new Ticket(vehicle, parkingSpot);
-                return ticket;
-            }
+        ParkingSpot parkingSpot = parkingFloor.findAvailableSpot(vehicle);
+        if (parkingSpot != null) {
+            parkingSpot.park(vehicle);
+            Ticket ticket = new Ticket(vehicle, parkingSpot);
+            return ticket;
         }
-        return null;
-
+        return null; // no spot available
     }
+    
     public void setFeeStrategy (feestrategy feeStrategy) {
         this.feeStrategy = feeStrategy;
     }

@@ -1,12 +1,12 @@
 public class ParkingSpot {
     int spotId;
-    VehicleSize size;
+    VehicleSize size; // spot size
     boolean isavailable;
     Vehicle vehicle;
 
     public ParkingSpot(int spotId, VehicleSize size) {
         this.spotId = spotId;
-        this.size = size;
+        this.size = size; // spot size
         this.isavailable = true;    
     }
 
@@ -32,7 +32,7 @@ public class ParkingSpot {
     }
 
     public boolean canFitVehicle(Vehicle vehicle) {
-        if (isavailable) return false;
+        if (!isavailable) return false;
 
         switch (vehicle.getSize()) {
             case SMALL:
