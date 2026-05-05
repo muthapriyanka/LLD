@@ -23,3 +23,13 @@ public class Payment {
         this.status = status;
     }
 }
+
+// PaymentRequest is meant to be:
+
+// immutable input from client
+
+// If you add status to it, you’re mixing input + system state, which creates problems:
+
+// 1. Violates separation of concerns
+// Request → comes from outside (client)
+// Status → managed by system

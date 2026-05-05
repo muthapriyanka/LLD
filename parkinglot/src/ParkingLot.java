@@ -8,6 +8,7 @@ public class ParkingLot {
 
     private ParkingLot() {
         this.floors = new ArrayList<>();
+        feeStrategy = new FlatRateFee();
     }
     public static synchronized ParkingLot getInstance() {
         if(instance == null) {
@@ -30,7 +31,7 @@ public class ParkingLot {
         }
         return null; // no spot available
     }
-    
+
     public void setFeeStrategy (feestrategy feeStrategy) {
         this.feeStrategy = feeStrategy;
     }
@@ -39,10 +40,7 @@ public class ParkingLot {
         ParkingSpot parkingSpot = ticket.getSpot();
         parkingSpot.unpark();
         ticket.setExitTimestamp();
-        if (feeStrategy != null) {
-            int fee = feeStrategy.calculatefees(ticket);
-            return Optional.of((double) fee);
-        }
-        return Optional.empty();
+        int fee = feeStrategy.calculatefees(ticket);
+        return Optional.of((double) fee);
     }
 }
