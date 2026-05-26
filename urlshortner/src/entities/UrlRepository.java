@@ -1,6 +1,9 @@
 package urlshortner.src.entities;
 
 public interface UrlRepository {
-    public void save(UrlMapping urlMapping);
-    public UrlMapping findByShortCode(String shortCode);
+    void save(UrlMapping urlMapping);
+
+    UrlMapping findByShortCode(String shortCode);
+
+    UrlMapping findByLongUrl(String longUrl);
 }

@@ -16,7 +16,9 @@ public class URLShortenerServiceDemo {
         URLShortenerService urlShortenerService = new URLShortenerService(idGenerator, encoder, urlRepository);
         String shortUrl = urlShortenerService.shortenUrl(originalUrl);
         System.out.println("Short URL: http://short.ly/" + shortUrl);
-        String retrievedUrl = urlShortenerService.longurl(shortUrl);
+        String duplicateShortUrl = urlShortenerService.shortenUrl(originalUrl);
+        System.out.println("Duplicate Short URL: http://short.ly/" + duplicateShortUrl);
+        String retrievedUrl = urlShortenerService.getLongUrl(shortUrl);
         System.out.println("Retrieved URL: " + retrievedUrl);
     }
     

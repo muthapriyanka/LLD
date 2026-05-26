@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
 import pubsubsystem.entities.Message;
 import pubsubsystem.entities.Topic;
 import pubsubsystem.subscriber.Subscriber;
@@ -79,23 +78,14 @@ public class PubSubService {
 // What happens?
 
 // If you have:
-
 // 1 topic → 1 thread pool ✅
-
 // 10 topics → 10 thread pools ⚠️
-
 // 100 topics → 100 thread pools ❌
-
 // Each thread pool:
-
 // Manages its own threads
-
 // Has its own lifecycle
-
 // Consumes memory
-
 // Needs shutdown logic
-
 // That can become heavy quickly.
 
 // Option B: Shared Executor (Your Current Design)
@@ -106,20 +96,12 @@ public class PubSubService {
 // new Topic(name, deliveryExecutor);
 
 // Now:
-
 // 1 thread pool
-
 // Shared across all topics
-
 // Centralized lifecycle management
-
 // Easier shutdown
-
 // Better resource utilization
-
 // Why Shared Executor is Better Here
 // 1️⃣ Resource efficiency
-
 // Thread pools are expensive.
-
 // Creating one per topic is wasteful.

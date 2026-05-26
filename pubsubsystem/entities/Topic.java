@@ -75,27 +75,17 @@ public class Topic {
 // subscriber.onMessage(message);
 
 // Then:
-
 // All subscribers execute sequentially.
-
 // One slow subscriber delays others.
-
 // Publisher is blocked until all finish.
-
 // ExecutorService makes delivery asynchronous.
 
 // 🔹 What Type of Executor You Used
-
 // You used:
-
 // Executors.newCachedThreadPool();
-
 // This means:
-
 // Thread pool grows as needed.
-
 // Reuses idle threads.
-
 // Good for short, bursty tasks (like message delivery).
 
 // 🔹 What If You Removed ExecutorService?
@@ -109,5 +99,63 @@ public class Topic {
 // Now:
 
 // All subscribers run in the same thread.
-
 // Slow subscriber blocks entire system.
+
+
+// Step-by-step flow
+// 1. broadcast() is called
+// Main thread enters broadcast()
+// 2. Loop over subscribers
+// Subscriber1
+// Subscriber2
+// Subscriber3
+// ...
+// SubscriberN
+// 3. For each subscriber → create a task
+
+// This line:
+
+// deliveryExecutor.submit(() -> { ... });
+
+// does NOT execute immediately.
+
+// 👉 It creates a task (Runnable) and gives it to the thread pool.
+
+// 4. Tasks go into Executor queue
+// [ Task1, Task2, Task3, ... ]
+// 5. Thread pool picks tasks
+
+// Suppose:
+
+// ExecutorService executor = Executors.newFixedThreadPool(3);
+
+// Then:
+
+// Thread-1 → Subscriber1
+// Thread-2 → Subscriber2
+// Thread-3 → Subscriber3
+
+// Remaining tasks wait in queue.
+
+// 6. Parallel execution happens
+
+// Each thread runs:
+
+// subscriber.onMessage(message);
+
+// So:
+
+// Subscriber1 receives message
+// Subscriber2 receives message
+// Subscriber3 receives message
+// → all at the same time
+
+// new Runnable() {
+//     @Override
+//     public void run() {
+//         subscriber.onMessage(message);
+//     }
+// }
+
+// Use ExecutorService when you have many tasks: Runnable represents the unit of work. 
+// ExecutorService is used to execute many Runnable tasks efficiently using a thread pool. For a pub-sub broadcast, I prefer ExecutorService because it avoids creating a new thread per subscriber and gives better control over concurrency.

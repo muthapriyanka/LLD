@@ -22,7 +22,7 @@ public class TokenBucketRateLimiter extends RateLimiter {
         double refillRate = (double) config.getMaxrequests() / config.getTimewindow(); // tokens per second
         int tokensToAdd = (int) (timeElapsed * refillRate);
         if (tokensToAdd > 0) {
-            currentTokens = Math.min(config.getMaxrequests(), currentTokens + tokensToAdd);
+            currentTokens = Math.min(config.getMaxrequests(), currentTokens + tokensToAdd); //Because bucket should never exceed max capacity.
             lastRefillTime.put(id, currentTime);
         }
 

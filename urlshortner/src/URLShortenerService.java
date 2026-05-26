@@ -16,15 +16,22 @@ public class URLShortenerService {
         this.urlRepository = urlRepository;
     }
 
-    public String shortenUrl(String originalUrl) {
+    public synchronized String shortenUrl(String originalUrl) {
+        UrlMapping existingMapping = urlRepository.findByLongUrl(originalUrl);
+        if (existingMapping != null) {
+            return existingMapping.getShortCode();
+        }
+
         long id = idGenerator.nextId();
         String shortCode = encoder.encode(id);
+
         UrlMapping mapping = new UrlMapping(shortCode, originalUrl);
         urlRepository.save(mapping);
+
         return shortCode;
     }
 
-    public String longurl(String shortCode) {
+    public String getLongUrl(String shortCode) {
         UrlMapping mapping = urlRepository.findByShortCode(shortCode);
         return mapping != null ? mapping.getLongUrl() : null;
     }

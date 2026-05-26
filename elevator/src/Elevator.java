@@ -79,3 +79,12 @@ public class Elevator implements Runnable {
         }
     }
 }
+
+// Why not ExecutorService there?
+
+// You can use it, but usually:
+
+// Elevator = long-lived object
+// Not short tasks
+// Needs its own lifecycle
+

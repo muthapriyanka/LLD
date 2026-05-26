@@ -5,6 +5,14 @@ public class Base62Encoder implements Encoder {
 
     @Override
     public String encode(long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("id cannot be negative");
+        }
+
+        if (id == 0) {
+            return "0";
+        }
+
         StringBuilder sb = new StringBuilder();
         while (id > 0) {
             int remainder = (int) (id % 62);
