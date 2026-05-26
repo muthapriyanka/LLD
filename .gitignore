@@ -6,3 +6,6 @@ out/
 
 # Mac system files
 .DS_Store
+
+# Salesforce DX local files
+.sfdx/
