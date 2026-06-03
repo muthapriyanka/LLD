@@ -3,7 +3,6 @@ package splitwise.src.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import splitwise.src.strategy.SplitStrategy;
 
 public class Expenses {
@@ -15,7 +14,7 @@ public class Expenses {
     List<Double> splitValues;
 
     List<User> participants;
-    List<Split> splits; // List of how much each user owes for this expense
+    List<Split> splits; // Final calculated amount each user owes for this expense
     
     public Expenses(String description, double amount, User paidBy, List<User> participants, SplitStrategy splitStrategy, List<Double> splitValues) {
         this.id = UUID.randomUUID().hashCode(); // Simple unique ID generation
@@ -28,12 +27,13 @@ public class Expenses {
         this.splits = new ArrayList<>();
     }
 
-    public void addSplit(Split split) {
-        splits.add(split);
+    public List<Split> calculateSplits() {
+        this.splits = splitStrategy.calculateSplits(amount, paidBy, participants, splitValues);
+        return new ArrayList<>(splits);
     }
 
-    public List<Split> calculateSplits() {
-        return splitStrategy.calculateSplits(amount, paidBy, participants, splitValues);
+    public List<Split> getSplits() {
+        return new ArrayList<>(splits);
     }
 
 

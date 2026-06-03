@@ -20,7 +20,7 @@ public class SplitwiseServiceDemo {
         // Set split strategy
         instance.setSplitStrategy(new PercentageSplitStrategy());
         // Add expense
-        instance.addExpense("Hotel", 1000, alice, groupMembers, Arrays.asList(50.0, 30.0, 20.0));
+        instance.addExpense(tripGroup, "Hotel", 1000, alice, groupMembers, Arrays.asList(50.0, 30.0, 20.0)); //is not the final split amount always. It is the input values needed by the strategy. we are sending how much percentage does every user owns
 
         // Show balances
         alice.getBalanceSheet().showBalances();

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import splitwise.src.entities.Expenses;
 import splitwise.src.entities.Group;
 import splitwise.src.entities.Split;
@@ -49,13 +48,11 @@ public class SplitwiseService {
         return splitStrategy;
     }
 
-    public void addExpense(String description, double amount, User paidBy, List<User> participants, List<Double> splitValues) {
+    public Expenses addExpense(Group group, String description, double amount, User paidBy, List<User> participants, List<Double> splitValues) {
         Expenses expense = new Expenses(description, amount, paidBy, participants, splitStrategy, splitValues);
         List<Split> splits = expense.calculateSplits();
+        group.addExpense(expense);
 
-        for (Split split : splits) {
-            expense.addSplit(split);
-        }
         // Update balance sheets for all participants based on the splits
         for (Split split : splits) {
             User participant = split.getUser();
@@ -66,6 +63,8 @@ public class SplitwiseService {
                 paidBy.getBalanceSheet().updateBalance(participant, owedAmount);
             }
         }
+
+        return expense;
     }
 
     
