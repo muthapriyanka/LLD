@@ -1,6 +1,6 @@
 
 
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 public class Address {
     String street;

@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 public enum OrderStatus {
     PENDING,

@@ -3,6 +3,13 @@ package onlineshoppingapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import onlineshoppingapp.entities.CartItem;
+import onlineshoppingapp.entities.Order;
+import onlineshoppingapp.entities.OrderItem;
+import onlineshoppingapp.entities.OrderStatus;
+import onlineshoppingapp.entities.ShoppingCart;
+import onlineshoppingapp.entities.User;
+
 public class OrderService {
     private static int orderIdCounter = 1;
 

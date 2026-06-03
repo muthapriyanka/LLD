@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.strategy;
 
 public class CashStrategy implements PaymentStrategy {
     @Override

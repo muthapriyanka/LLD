@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 import java.util.List;
 

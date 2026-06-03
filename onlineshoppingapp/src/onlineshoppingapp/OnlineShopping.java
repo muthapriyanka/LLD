@@ -3,6 +3,13 @@ package onlineshoppingapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import onlineshoppingapp.entities.CartItem;
+import onlineshoppingapp.entities.Order;
+import onlineshoppingapp.entities.Product;
+import onlineshoppingapp.entities.ShoppingCart;
+import onlineshoppingapp.entities.User;
+import onlineshoppingapp.strategy.PaymentStrategy;
+
 public class OnlineShopping {
     private static OnlineShopping instance;
     List<Product> products;
@@ -47,14 +54,26 @@ public class OnlineShopping {
             return null;
         }
 
+        for (CartItem cartItem : cart.getItems().values()) {
+            if (!cartItem.getProduct().isAvailable(cartItem.getQuantity())) {
+                System.out.println("Not enough stock available for " + cartItem.getProduct().getName());
+                return null;
+            }
+        }
+
         boolean paymentSuccess = paymentService.processPayment(this.paymentStrategy, cart.calculateTotal());
         if (!paymentSuccess) {
             System.out.println("Payment failed. Please try again.");
             return null;
         }
 
+        for (CartItem cartItem : cart.getItems().values()) {
+            cartItem.getProduct().reduceStock(cartItem.getQuantity());
+        }
+
         Order order = orderService.createOrder(user, cart);
         orders.add(order);
+        cart.clearCart();
         return order;
     }
 

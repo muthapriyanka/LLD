@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 public class OrderItem {
     private String id;

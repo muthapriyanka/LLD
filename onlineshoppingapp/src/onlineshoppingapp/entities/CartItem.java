@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 public class CartItem {
     private final Product product;

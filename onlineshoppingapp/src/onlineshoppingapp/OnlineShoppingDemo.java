@@ -1,12 +1,20 @@
 package onlineshoppingapp;
 
+import onlineshoppingapp.entities.Address;
+import onlineshoppingapp.entities.Order;
+import onlineshoppingapp.entities.Product;
+import onlineshoppingapp.entities.ProductCategory;
+import onlineshoppingapp.entities.User;
+import onlineshoppingapp.strategy.CashStrategy;
+import onlineshoppingapp.strategy.PaymentStrategy;
+
 public class OnlineShoppingDemo {
     public static void main(String[] args) {
         OnlineShopping onlineShopping = OnlineShopping.getInstance();
 
-        Product product1 = new Product("Laptop", "High performance laptop", 1000.0, ProductCategory.Electronics);
-        Product product2 = new Product("T-Shirt", "Cotton t-shirt", 20.0, ProductCategory.Clothing);
-        Product product3 = new Product("Vacuum Cleaner", "Powerful vacuum", 150.0, ProductCategory.HomeAppliances);
+        Product product1 = new Product("Laptop", "High performance laptop", 1000.0, ProductCategory.Electronics, 5);
+        Product product2 = new Product("T-Shirt", "Cotton t-shirt", 20.0, ProductCategory.Clothing, 20);
+        Product product3 = new Product("Vacuum Cleaner", "Powerful vacuum", 150.0, ProductCategory.HomeAppliances, 3);
         User user1 = new User("Alice", "alice@example.com", new Address("123 Main St", "City", "State", "Zip"));
         User user2 = new User("Bob", "bob@example.com", new Address("456 Oak Ave", "City", "State", "Zip"));
         onlineShopping.addProduct(product1);

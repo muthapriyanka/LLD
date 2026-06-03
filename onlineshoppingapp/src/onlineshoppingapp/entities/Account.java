@@ -1,4 +1,4 @@
-package onlineshoppingapp;
+package onlineshoppingapp.entities;
 
 public class Account {
     private final String username;
