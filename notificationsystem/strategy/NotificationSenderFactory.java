@@ -1,4 +1,6 @@
-package notificationsystem.entities;
+package notificationsystem.strategy;
+
+import notificationsystem.entities.Channel;
 
 public class NotificationSenderFactory {
 

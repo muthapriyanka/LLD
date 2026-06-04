@@ -2,9 +2,9 @@ package notificationsystem;
 
 import notificationsystem.entities.Channel;
 import notificationsystem.entities.NotificationMessage;
-import notificationsystem.entities.NotificationSender;
-import notificationsystem.entities.NotificationSenderFactory;
 import notificationsystem.entities.User;
+import notificationsystem.strategy.NotificationSender;
+import notificationsystem.strategy.NotificationSenderFactory;
 
 public class NotificationDispatcher {
     

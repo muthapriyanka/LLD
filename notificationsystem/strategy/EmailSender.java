@@ -1,4 +1,7 @@
-package notificationsystem.entities;
+package notificationsystem.strategy;
+
+import notificationsystem.entities.NotificationMessage;
+import notificationsystem.entities.User;
 
 public class EmailSender implements NotificationSender{
      @Override
