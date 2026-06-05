@@ -1,3 +1,5 @@
+package movieticketbookingsystem.entities;
+
 public class Seat {
     private final int row;
     private final int number;

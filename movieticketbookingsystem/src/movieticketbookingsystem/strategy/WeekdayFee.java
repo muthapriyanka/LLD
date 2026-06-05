@@ -1,3 +1,8 @@
+package movieticketbookingsystem.strategy;
+
+import movieticketbookingsystem.entities.SeatType;
+import movieticketbookingsystem.entities.Show;
+
 public class WeekdayFee implements FeeStrategy {
     @Override
     public double calculateFee(Show show, SeatType seatType) {

@@ -1,3 +1,5 @@
+package movieticketbookingsystem.entities;
+
 import java.util.List;
 import java.util.UUID;
 

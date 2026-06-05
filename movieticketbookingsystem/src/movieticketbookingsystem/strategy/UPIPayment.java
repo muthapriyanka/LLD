@@ -1,3 +1,5 @@
+package movieticketbookingsystem.strategy;
+
 public class UPIPayment implements Payment {
     @Override
     public boolean processPayment(double amount) {

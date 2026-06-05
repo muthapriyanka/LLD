@@ -1,5 +1,12 @@
+package movieticketbookingsystem;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import movieticketbookingsystem.entities.Movie;
+import movieticketbookingsystem.entities.Screen;
+import movieticketbookingsystem.entities.Show;
+import movieticketbookingsystem.entities.User;
 
 public class MovieBookingSystem {
     List<Screen> screens;

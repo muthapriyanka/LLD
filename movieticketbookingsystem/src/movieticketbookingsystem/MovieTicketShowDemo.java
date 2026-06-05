@@ -1,4 +1,18 @@
+package movieticketbookingsystem;
+
 import java.util.Arrays;
+
+import movieticketbookingsystem.entities.Booking;
+import movieticketbookingsystem.entities.Movie;
+import movieticketbookingsystem.entities.Screen;
+import movieticketbookingsystem.entities.Seat;
+import movieticketbookingsystem.entities.SeatType;
+import movieticketbookingsystem.entities.Show;
+import movieticketbookingsystem.entities.User;
+import movieticketbookingsystem.strategy.FeeStrategy;
+import movieticketbookingsystem.strategy.Payment;
+import movieticketbookingsystem.strategy.UPIPayment;
+import movieticketbookingsystem.strategy.WeekdayFee;
 
 public class MovieTicketShowDemo {
     public static void main(String[] args) {

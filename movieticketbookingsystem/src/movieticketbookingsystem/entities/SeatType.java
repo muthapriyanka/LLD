@@ -1,3 +1,5 @@
+package movieticketbookingsystem.entities;
+
 public  enum SeatType {
     REGULAR(50.0),
     PREMIUM(80.0),

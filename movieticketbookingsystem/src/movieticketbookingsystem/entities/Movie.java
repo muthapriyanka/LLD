@@ -1,3 +1,5 @@
+package movieticketbookingsystem.entities;
+
 public class Movie {
     String name;
     String genre;
