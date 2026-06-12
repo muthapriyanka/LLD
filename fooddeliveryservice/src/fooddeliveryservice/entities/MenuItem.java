@@ -1,5 +1,7 @@
 
 
+package fooddeliveryservice.entities;
+
 public class MenuItem {
     int id;
     String name;

@@ -1,5 +1,7 @@
 
 
+package fooddeliveryservice.entities;
+
 public enum OrderStatus {
     PLACED,
     PREPARING,

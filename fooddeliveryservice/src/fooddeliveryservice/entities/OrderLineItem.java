@@ -1,5 +1,7 @@
 
 
+package fooddeliveryservice.entities;
+
 public class OrderLineItem {
     int orderid;
     int quantity;

@@ -1,6 +1,10 @@
 
 
+package fooddeliveryservice.entities;
+
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import fooddeliveryservice.observer.Observer;
 
 public class DeliveryAgent implements Observer {
     int agentId;
@@ -44,7 +48,7 @@ public class DeliveryAgent implements Observer {
     @Override
     public void update(Order order) {
         // Notify the delivery agent about the order status update
-        System.out.println("Delivery Agent " + name + " notified about order " + order.getOderid() + " status update.");
+        System.out.println("Delivery Agent " + name + " notified about order " + order.getOrderId() + " status: " + order.getOrderStatus());
     }   
 
 }

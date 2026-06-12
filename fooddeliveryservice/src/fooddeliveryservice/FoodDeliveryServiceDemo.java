@@ -1,5 +1,16 @@
+package fooddeliveryservice;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import fooddeliveryservice.entities.Address;
+import fooddeliveryservice.entities.DeliveryAgent;
+import fooddeliveryservice.entities.Menu;
+import fooddeliveryservice.entities.MenuItem;
+import fooddeliveryservice.entities.Order;
+import fooddeliveryservice.entities.OrderLineItem;
+import fooddeliveryservice.entities.Restaurant;
+import fooddeliveryservice.entities.User;
 
 public class FoodDeliveryServiceDemo {
     public static void main(String[] args) {
@@ -17,12 +28,10 @@ public class FoodDeliveryServiceDemo {
 
         FoodDeliveryService service = FoodDeliveryService.getInstance();
         service.addRestaurant(restaurant);
-        service.addObserver(restaurant);
 
         // Create a customer
         User customer = new User(1, "John Doe", new Address("New York", "NY", 10002, "123 Main St", 40.7135, -74.0055));
         service.addUser(customer);
-        service.addObserver(customer);
 
         // Place an order
         List<OrderLineItem> orderItems = new ArrayList<>();
@@ -35,7 +44,6 @@ public class FoodDeliveryServiceDemo {
         DeliveryAgent agent2 = new DeliveryAgent(new Address("New York", "NY", 10004, "321 Elm St", 40.7100, -74.0045), "Bob", 2, "555-0102");
         service.addDeliveryAgent(agent1);
         service.addDeliveryAgent(agent2);
-        // Do not add agents to observers - they'll be added when assigned
 
         // Assign a delivery agent for the order
         service.assignDeliveryAgent(order);

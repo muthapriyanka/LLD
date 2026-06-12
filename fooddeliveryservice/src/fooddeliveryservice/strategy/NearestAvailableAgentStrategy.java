@@ -1,7 +1,13 @@
 
 
+package fooddeliveryservice.strategy;
+
 import java.util.List;
 import java.util.Optional;
+
+import fooddeliveryservice.entities.Address;
+import fooddeliveryservice.entities.DeliveryAgent;
+import fooddeliveryservice.entities.Order;
 
 public class NearestAvailableAgentStrategy implements DeliveryAgentStrategy {
     @Override

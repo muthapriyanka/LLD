@@ -13,3 +13,4 @@ public enum LogLevel {
         return this.level >= other.level;
     }
 }
+//So when Java creates enum values internally, it does something like: DEBUG.level = 1

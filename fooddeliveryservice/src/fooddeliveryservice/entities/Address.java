@@ -1,5 +1,7 @@
 
 
+package fooddeliveryservice.entities;
+
 public class Address {
     String city;
     String state;
