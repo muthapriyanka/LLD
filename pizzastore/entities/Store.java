@@ -1,10 +1,7 @@
 package pizzastore.entities;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import pizzastore.strategy.Deal;
@@ -14,7 +11,6 @@ public class Store {
     private Map<String, BigDecimal> basePrices;
     private Map<String, BigDecimal> toppingPrices;
     private Map<String, BigDecimal> drinkPrices;
-    private List<Deal> deals;
     private Deal deal;
 
     public Store(String name) {
@@ -22,7 +18,6 @@ public class Store {
         this.basePrices = new HashMap<>();
         this.toppingPrices = new HashMap<>();
         this.drinkPrices = new HashMap<>();
-        this.deals = new ArrayList<>();
     }
 
     public String getName() {
@@ -38,10 +33,6 @@ public class Store {
     }
     public void addDrinkPrice(String name, BigDecimal price) {
         this.drinkPrices.put(name, price);
-    }
-
-    public void addDeal(Deal deal) {
-        this.deals.add(deal);
     }
 
     public Base createBase(String name) {
@@ -65,13 +56,9 @@ public class Store {
         return new Drink(name, drinkPrices.get(name));
     }
 
-    public List<Deal> getDeals() {
-        return Collections.unmodifiableList(this.deals);
-    }
-
     public void setDeal(Deal deal) {
-    this.deal = deal;
-}
+        this.deal = deal;
+    }
 
     public Deal getDeal() {
         return deal;

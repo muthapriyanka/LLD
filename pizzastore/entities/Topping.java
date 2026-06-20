@@ -2,7 +2,7 @@ package pizzastore.entities;
 
 import java.math.BigDecimal;
 
-public class Topping implements OrderItem {
+public class Topping {
     private String name;
     private BigDecimal price;
 
