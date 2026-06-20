@@ -1,4 +1,6 @@
 
+package atm.chainofresponsibility;
+
 public class CashDispenser {
     private final DispenseChain chain;
 

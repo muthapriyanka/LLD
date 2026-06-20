@@ -1,4 +1,9 @@
 
+package atm;
+
+import atm.entities.Account;
+import atm.entities.Card;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,8 +47,12 @@ public class BankService {
         return cardAccountMap.get(card).getBalance();
     }
 
-    public void withdrawMoney(Card card, double amount) {
-        cardAccountMap.get(card).withdraw(amount);
+    public boolean withdrawMoney(Card card, double amount) {
+        Account account = cardAccountMap.get(card);
+        if (account == null) {
+            return false;
+        }
+        return account.withdraw(amount);
     }
 
     public void depositMoney(Card card, double amount) {

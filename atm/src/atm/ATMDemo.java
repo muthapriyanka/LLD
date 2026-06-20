@@ -1,4 +1,9 @@
 
+package atm;
+
+import atm.entities.OperationType;
+import atm.entities.Transaction;
+
 public class ATMDemo {
     public static void main(String[] args) {
         ATMSystem atmSystem = ATMSystem.getInstance();
@@ -31,5 +36,10 @@ public class ATMDemo {
         // Insert Incorrect PIN
         atmSystem.insertCard("1234-5678-9012-3456");
         atmSystem.enterPin("3425");
+
+        System.out.println("\nTransaction History:");
+        for (Transaction transaction : atmSystem.getTransactionHistory()) {
+            System.out.println(transaction);
+        }
     }
 }

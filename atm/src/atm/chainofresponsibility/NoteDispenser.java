@@ -1,4 +1,6 @@
 
+package atm.chainofresponsibility;
+
 abstract class NoteDispenser implements DispenseChain {
     private DispenseChain nextChain;
     private final int noteValue;

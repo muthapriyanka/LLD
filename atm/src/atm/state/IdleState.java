@@ -1,4 +1,10 @@
 
+package atm.state;
+
+import atm.ATMSystem;
+import atm.entities.Card;
+import atm.entities.OperationType;
+
 public class IdleState implements ATMState {
     @Override
     public void insertCard(ATMSystem atmSystem, String cardNumber) {

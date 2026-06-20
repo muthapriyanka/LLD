@@ -1,4 +1,9 @@
 
+package atm.state;
+
+import atm.ATMSystem;
+import atm.entities.OperationType;
+
 public class AuthenticatedState implements ATMState {
     @Override
     public void insertCard(ATMSystem atmSystem, String cardNumber) {
@@ -25,16 +30,13 @@ public class AuthenticatedState implements ATMState {
                 }
                 int amountToWithdraw = args[0];
 
-                double accountBalance = atmSystem.getBankService().getBalance(atmSystem.getCurrentCard());
-
-                if (amountToWithdraw > accountBalance) {
-                    System.out.println("Error: Insufficient balance.");
-                    break;
-                }
-
                 System.out.println("Processing withdrawal for $" + amountToWithdraw);
                 // Delegate the complex withdrawal logic to the ATM's dedicated method
-                atmSystem.withdrawCash(amountToWithdraw);
+                try {
+                    atmSystem.withdrawCash(amountToWithdraw);
+                } catch (IllegalStateException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
                 break;
 
             case DEPOSIT_CASH:
